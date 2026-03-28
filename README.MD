@@ -1,67 +1,68 @@
-# 🏘️ Homely: Premium Real Estate Automation
+# Homely Digital Strata: Automated SQL Hydration Engine 🐍🏗️
 
-A full-stack integration project showcasing the bridge between **Python-driven data extraction** and **High-End WordPress Design**.
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)
+![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
 
----
+This is a **portable Python utility** designed to automate the extraction and injection of real estate data into any WordPress-based SQL environment.
 
-## 🚀 Project Overview
-
-This repository contains the backend logic for **Homely**, a boutique real estate platform. While the frontend is a premium WordPress environment (currently showcased via UI mockups), this Python engine handles the heavy lifting of data collection and preparation.
-
-### **The Full-Stack Workflow:**
-
-1.  **Extraction:** Python scripts crawl real estate portals to fetch live property listings.
-2.  **Transformation:** Data is cleaned and structured into CSV format using Object-Oriented Programming (OOP).
-3.  **Loading:** Structured data is injected into a **LocalWP** environment for professional display.
+Instead of manual entry, this engine provides a structured **ETL (Extract, Transform, Load)** pipeline that architects can integrate into their existing digital ecosystems to manage large-scale property datasets.
 
 ---
 
-## 🛠️ Technical Stack
+## 💎 Why Use This Engine?
 
-- **Backend:** Python 3.13 (OOP Architecture)
-- **Data Handling:** CSV Serialization & Dictionary Mapping
-- **Frontend Showcase:** WordPress (Spexo Theme + Elementor Pro)
-- **Design Aesthetic:** "Midnight Gold" (Black & Gold Premium UI)
-- **Environment:** LocalWP & Git Version Control
+If you are managing high volumes of data (e.g., **17,000+ listings**), manual WordPress entry is not an option. This engine treats data as "strata"—layers of information that must be precision-deposited into a database.
 
----
+### Core Capabilities:
 
-## 📂 Repository Structure
-
-- `property.py`: The core automation engine. Built using a class-based structure for scalability.
-- `homely_listings.csv`: The data bridge used to sync Python results with the WordPress database.
+- **Modular Integration:** Drop this script into any project to handle data migration.
+- **Automated Schema Creation:** Automatically builds the `wp_property_listings` table in your target SQL database.
+- **High-Speed Hydration:** Uses batch processing (`executemany`) to populate thousands of rows in seconds.
+- **Scientific Precision:** Built with strict data typing for currency and location metadata.
 
 ---
 
-## 💻 How It Works (Python Logic)
+## 🚀 How to Integrate This Into Your Project
 
-The `HomelyScraper` class is designed to simulate a real-world scraping environment. It utilizes:
+This engine is designed to be a **standalone tool**. You do not need to clone a specific site to use it; you simply need a running MySQL/MariaDB instance.
 
-- **Type Hinting:** For robust, error-free data handling.
-- **Exception Handling:** To manage File I/O operations safely.
-- **Mock Integration:** Designed to be easily swapped with `BeautifulSoup` or `Selenium` for live portal scraping.
+### 1. Requirements
 
-```python
-# To run the scraper logic locally:
-python property.py
+- Python 3.x
+- A target MySQL Database (LocalWP, XAMPP, or Live Server)
+- `mysql-connector-python` library
+
+### 2. Setup
+
+1.  **Clone this Utility:**
+    ```bash
+    git clone [https://github.com/KeruboNancy/homely-property-scrapper.git](https://github.com/KeruboNancy/homely-property-scrapper.git)
+    ```
+2.  **Configure your Handshake:**
+    Open `engine.py` and update the `self.config` dictionary with your specific site's database credentials:
+    ```python
+    self.config = {
+        'host': '127.0.0.1',
+        'user': 'your_db_user',
+        'password': 'your_db_password',
+        'database': 'your_target_db_name',
+        'port': 'your_port'
+    }
+    ```
+
+### 3. Execution
+
+Run the engine to hydrate your database:
+
+```bash
+python engine.py
+📊 Technical Architecture
+The engine acts as the bridge between raw data sources and your WordPress UI. It performs a "digital deposition," ensuring that every property record is mapped correctly to its SQL column.
+
+## 📧 Contact & Collaboration
+**Nancy Kerubo** | *Geologist & Digital Architect* * [Email Me](mailto:nancykerry77@gmail.com)
+* [Portfolio Site](https://your-portfolio-url.com)
+
+Portable. Precise. Professional.
 ```
-
-## 🎨 Visual Frontend
-
-The frontend for this project is a bespoke 7-page WordPress site featuring a "Boutique Hotel" aesthetic.
-
-Visual Proof: View the high-fidelity screenshots in my [Main Portfolio Link].
-
-Deployment: Managed a repository of 17,000+ files through custom Git workflows to ensure seamless local-to-cloud transitions.
-
-## 📞 Contact & Collaboration
-
-Built by a developer focused on Automation and Premium UI/UX.
-
-GitHub:https://github.com/KeruboNancy
-
-Portfolio:https://github.com/KeruboNancy/portffolio-py.git
-Email: kerubohnancy77@gmail.com
-
----
-
