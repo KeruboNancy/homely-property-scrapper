@@ -62,7 +62,7 @@ The engine acts as the bridge between raw data sources and your WordPress UI. It
 
 ## 📧 Contact & Collaboration
 **Nancy Kerubo** | *Geologist & Digital Architect* * [Email Me](mailto:nancykerry77@gmail.com)
-* [Portfolio Site](https://your-portfolio-url.com)
+* [Portfolio Site](https://kerubonancyportfolio.netlify.app/g)
 
 Portable. Precise. Professional.
 ```
