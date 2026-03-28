@@ -1,50 +1,76 @@
-import csv
-import os
+import mysql.connector
+from mysql.connector import Error
 from typing import List, Dict
 
 
-class HomelyScraper:
-    """A professional scraper class to manage real estate data extraction."""
+class HomelyEngine:
+    """
+    Architectural Engine: ETL (Extract, Transform, Load) 
+    Process for Real Estate Data Strata.
+    """
 
-    def __init__(self, output_file: str = "homely_listings.csv"):
-        self.output_file = output_file
-        self.data: List[Dict[str, str]] = []
+    def __init__(self):
+        # Configuration - Update these from your LocalWP 'Database' tab
+        self.config = {
+            'host': '127.0.0.1',
+            'user': 'root',
+            'password': 'root',
+            'database': 'local',
+            'port': '10011'  # <--- Ensure this matches LocalWP exactly
+        }
+        self.listings: List[Dict] = []
 
-    def fetch_mock_data(self) -> None:
-        """Simulates data retrieval from a real estate portal."""
-        print("🔍 Scanning for premium listings...")
-        self.data = [
-            {'Title': 'Luxury Gold Villa', 'Price': 'Ksh 45,000,000',
-                'Location': 'Karen', 'Beds': '5'},
-            {'Title': 'Modern Black Suite', 'Price': 'Ksh 12,500,000',
-                'Location': 'Westlands', 'Beds': '2'},
-            {'Title': 'Sunset Penthouse', 'Price': 'Ksh 30,000,000',
-                'Location': 'Kilimani', 'Beds': '3'},
+    def extract_data(self):
+        """Simulates data extraction from digital sources."""
+        print("🔍 Scanning Digital Strata...")
+        self.listings = [
+            {'title': 'Luxury Gold Villa', 'price': 45000000,
+                'loc': 'Karen', 'beds': 5},
+            {'title': 'Modern Black Suite', 'price': 12500000,
+                'loc': 'Westlands', 'beds': 2},
+            {'title': 'Sunset Penthouse', 'price': 30000000,
+                'loc': 'Kilimani', 'beds': 3},
         ]
 
-    def save_to_csv(self) -> bool:
-        """Saves extracted data to a CSV file for WordPress integration."""
-        if not self.data:
-            print("❌ Error: No data found to save.")
-            return False
-
+    def load_to_sql(self):
+        """Hydrates the SQL database with extracted listings."""
+        conn = None
         try:
-            keys = self.data[0].keys()
-            with open(self.output_file, 'w', newline='', encoding='utf-8') as f:
-                writer = csv.DictWriter(f, fieldnames=keys)
-                writer.writeheader()
-                writer.writerows(self.data)
+            conn = mysql.connector.connect(**self.config)
+            if conn.is_connected():
+                with conn.cursor() as cursor:
+                    # 1. Initialize Schema
+                    cursor.execute("""
+                        CREATE TABLE IF NOT EXISTS wp_property_listings (
+                            id INT AUTO_INCREMENT PRIMARY KEY,
+                            title VARCHAR(255) NOT NULL,
+                            price DECIMAL(15, 2),
+                            location VARCHAR(100),
+                            beds INT,
+                            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                        )
+                    """)
 
-            print(
-                f"✅ Success: {len(self.data)} properties saved to '{self.output_file}'")
-            return True
-        except IOError as e:
-            print(f"❌ File Error: {e}")
-            return False
+                    # 2. Batch Injection
+                    sql = "INSERT INTO wp_property_listings (title, price, location, beds) VALUES (%s, %s, %s, %s)"
+                    params = [(l['title'], l['price'], l['loc'], l['beds'])
+                              for l in self.listings]
+
+                    cursor.executemany(sql, params)
+                    conn.commit()
+
+                    print(
+                        f"✅ SUCCESS: {cursor.rowcount} records injected into SQL Strata.")
+
+        except Error as e:
+            print(f"❌ DATABASE ERROR: {e}")
+        finally:
+            if conn and conn.is_connected():
+                conn.close()
+                print("🔌 Connection securely closed.")
 
 
 if __name__ == "__main__":
-    # Initialize and run the scraper
-    scraper = HomelyScraper()
-    scraper.fetch_mock_data()
-    scraper.save_to_csv()
+    engine = HomelyEngine()
+    engine.extract_data()
+    engine.load_to_sql()
