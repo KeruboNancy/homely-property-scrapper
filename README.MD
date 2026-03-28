@@ -65,8 +65,3 @@ Email: kerubohnancy77@gmail.com
 
 ---
 
-### Pro-Tip for your GitHub:
-
-Once you upload this, GitHub will automatically render it with bold headings, code blocks, and lists. It makes your `property.py` file look like a serious software product rather than just a quick script.
-
-\*\*Would you like me to give you the `requirements.txt` file now so your repository look
